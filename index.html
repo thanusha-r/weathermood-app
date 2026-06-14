@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>WeatherMood</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="app theme-default" id="app">
+
+  <!-- ANIMATED BG BLOBS -->
+  <div class="bg-blobs">
+    <div class="blob blob1"></div>
+    <div class="blob blob2"></div>
+    <div class="blob blob3"></div>
+  </div>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="logo">
+      <div class="logo-icon">⛅</div>
+      <span>WeatherMood</span>
+    </div>
+    <div class="top-right">
+      <span id="currentTime" class="time-display"></span>
+      <span id="currentDate" class="date-display"></span>
+    </div>
+  </div>
+
+  <!-- SEARCH -->
+  <div class="search-wrap">
+    <div class="search-box">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M16.5 16.5L21 21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+      <input type="text" id="cityInput" placeholder="Search any city in the world..." />
+      <button onclick="getWeather()">Search</button>
+    </div>
+    <button class="location-btn" onclick="getLocation()">
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"
+          stroke="white" stroke-width="2"
+          fill="rgba(255,255,255,.2)"/>
+    <circle cx="12" cy="9" r="2.5"
+            stroke="white" stroke-width="2"/>
+  </svg>
+  My Location
+    </button>
+  </div>
+
+  <!-- ERROR -->
+  <div id="errorBox" class="error-box gone"></div>
+
+  <!-- LOADING -->
+  <div id="loadingBox" class="loading-box gone">
+    <div class="spinner"></div>
+    <span>Fetching weather...</span>
+  </div>
+
+  <!-- WEATHER CARD -->
+  <div id="weatherCard" class="weather-card gone">
+    <div class="card-left">
+      <div class="city-name" id="cityName"></div>
+      <div class="country" id="countryName"></div>
+      <div class="weather-icon" id="weatherIcon">☀️</div>
+      <div class="condition" id="condition"></div>
+      <div class="temp-main" id="tempMain"></div>
+      <div class="feels-like" id="feelsLike"></div>
+    </div>
+    <div class="card-right">
+      <div class="mood-badge" id="moodBadge"></div>
+      <div class="suggestion" id="suggestion"></div>
+      <div class="stats-grid">
+        <div class="stat"><span class="stat-icon">💧</span><div class="stat-value" id="humidity"></div><div class="stat-label">Humidity</div></div>
+        <div class="stat"><span class="stat-icon">💨</span><div class="stat-value" id="windSpeed"></div><div class="stat-label">Wind</div></div>
+        <div class="stat"><span class="stat-icon">👁️</span><div class="stat-value" id="visibility"></div><div class="stat-label">Visibility</div></div>
+        <div class="stat"><span class="stat-icon">🌡️</span><div class="stat-value" id="pressure"></div><div class="stat-label">Pressure</div></div>
+        <div class="stat"><span class="stat-icon">🌅</span><div class="stat-value" id="sunrise"></div><div class="stat-label">Sunrise</div></div>
+        <div class="stat"><span class="stat-icon">🌇</span><div class="stat-value" id="sunset"></div><div class="stat-label">Sunset</div></div>
+      </div>
+      <div class="outfit-card">
+        <div class="outfit-title">👗 What to Wear Today</div>
+        <div class="outfit-text" id="outfitText"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DEFAULT STATE -->
+  <div id="defaultState" class="default-state">
+
+    <!-- HERO -->
+    <div class="hero-section">
+      <div class="hero-weather-scene">
+        <div class="scene-sun">☀️</div>
+        <div class="scene-cloud c1">☁️</div>
+        <div class="scene-cloud c2">⛅</div>
+        <div class="scene-rain">
+          <span>🌧️</span>
+          <div class="raindrops">
+            <div class="raindrop"></div>
+            <div class="raindrop"></div>
+            <div class="raindrop"></div>
+            <div class="raindrop"></div>
+            <div class="raindrop"></div>
+          </div>
+        </div>
+        <div class="scene-moon">🌙</div>
+        <div class="scene-stars">
+          <span class="star">⭐</span>
+          <span class="star">✨</span>
+          <span class="star">⭐</span>
+        </div>
+      </div>
+
+      <div class="hero-text">
+        <h1 class="hero-title">Know Your Weather,<br/><span>Plan Your Day.</span></h1>
+        <p class="hero-sub">Real-time weather with mood & outfit suggestions for any city worldwide</p>
+      </div>
+    </div>
+
+    <!-- FEATURE CARDS -->
+    <div class="feature-cards">
+      <div class="feat-card">
+        <div class="feat-card-icon">🌡️</div>
+        <div class="feat-card-title">Live Temperature</div>
+        <div class="feat-card-sub">Real-time data from OpenWeather</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-icon">👗</div>
+        <div class="feat-card-title">Outfit Suggestions</div>
+        <div class="feat-card-sub">Know what to wear before you step out</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-icon">🎨</div>
+        <div class="feat-card-title">Dynamic Themes</div>
+        <div class="feat-card-sub">UI changes based on weather mood</div>
+      </div>
+      <div class="feat-card">
+        <div class="feat-card-icon">📍</div>
+        <div class="feat-card-title">Auto Location</div>
+        <div class="feat-card-sub">Detect your city automatically</div>
+      </div>
+    </div>
+
+    <!-- QUICK SEARCH -->
+    <div class="quick-section">
+      <div class="quick-label">🔥 Popular Cities</div>
+      <div class="quick-cities">
+        <button class="qcity" onclick="searchCity('Chennai')">Chennai</button>
+<button class="qcity" onclick="searchCity('Mumbai')">Mumbai</button>
+<button class="qcity" onclick="searchCity('Delhi')">Delhi</button>
+<button class="qcity" onclick="searchCity('Bangalore')">Bangalore</button>
+<button class="qcity" onclick="searchCity('London')">London</button>
+<button class="qcity" onclick="searchCity('Dubai')">Dubai</button>
+<button class="qcity" onclick="searchCity('Tokyo')">Tokyo</button>
+<button class="qcity" onclick="searchCity('New York')">New York</button>
+      </div>
+    </div>
+
+    <!-- TIPS TICKER -->
+    <div class="tips-bar">
+      <div class="tips-label">💡 Weather Tip</div>
+      <div class="tips-ticker" id="tipsTicker">
+        <div class="tip active">🌡️ Humidity above 70% makes it feel much hotter than the actual temperature!</div>
+        <div class="tip">☀️ UV index is highest between 10am–4pm. Always wear sunscreen outdoors!</div>
+        <div class="tip">🌧️ India's monsoon season runs June–September — always carry an umbrella!</div>
+        <div class="tip">💧 Drink at least 3 litres of water on hot days above 35°C to stay hydrated!</div>
+        <div class="tip">❄️ Wind chill makes it feel colder — always check the feels-like temperature!</div>
+        <div class="tip">🌅 Best time for outdoor exercise is early morning before 8am in summer!</div>
+      </div>
+    </div>
+
+  </div>
+<footer class="footer">
+  ⛅ WeatherMood • Designed & Developed by <strong>Thanusha R © 2026</strong>
+</footer>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
