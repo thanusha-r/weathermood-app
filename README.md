@@ -1,36 +1,44 @@
-# TodoPro — Task Management App ✅
+# WeatherMood — Weather App 🌤️
 
-A modern task management application designed to help users organize tasks, track deadlines, manage priorities, and improve productivity through an intuitive interface.
+A modern weather application that provides real-time weather information along with dynamic themes, mood suggestions, outfit recommendations, and location-based forecasts.
 
 ## 🚀 Features
 
-- User authentication (Login & Signup)
-- Task creation, editing, and deletion
-- Categories and priority management
-- Due date and time scheduling
-- Smart reminder notifications
-- Deadline tracking and overdue alerts
-- Search and filter tasks
-- Progress tracking dashboard
-- Responsive UI for desktop and mobile
-- Local Storage-based data persistence
-
-
+* Real-time weather data
+* City and district search
+* Dynamic UI themes based on weather conditions
+* Outfit recommendations
+* Mood suggestions and weather badges
+* Auto location detection
+* Weather tips and insights
+* Responsive design for desktop and mobile devices
 
 ## 🛠️ Tech Stack
 
 * HTML5
 * CSS3
 * JavaScript (ES6)
+* OpenWeather API
 
 ## 🌐 Live Demo
 
-https://thanusha-r.github.io/todo-pro-app/
+https://thanusha-r.github.io/weathermood-app/
 
 ## ▶️ How to Run
 
 1. Clone this repository
-2. Open `index.html` in your browser
+2. Create a free account at OpenWeather
+3. Generate an API key
+4. Open `js/app.js`
+5. Find:
+
+```javascript
+const API_KEY = "YOUR_API_KEY_HERE";
+```
+
+6. Replace it with your API key
+7. Open `index.html` in your browser
+
 
 ## 👨‍💻 Author
 
