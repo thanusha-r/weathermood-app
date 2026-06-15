@@ -23,6 +23,9 @@ A modern weather application that provides real-time weather information along w
 ## 🌐 Live Demo
 
 https://thanusha-r.github.io/weathermood-app/
+## 📸 Screenshot
+
+![Portfolio Screenshot](weathermood-home.png)
 
 ## ▶️ How to Run
 
