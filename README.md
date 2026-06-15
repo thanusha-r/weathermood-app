@@ -29,7 +29,7 @@ https://thanusha-r.github.io/weathermood-app/
 1. Clone this repository
 2. Create a free account at OpenWeather
 3. Generate an API key
-4. Open `js/app.js`
+4. Open `script.js`
 5. Find:
 
 ```javascript
